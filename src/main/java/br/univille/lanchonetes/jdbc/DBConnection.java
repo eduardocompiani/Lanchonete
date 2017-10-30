@@ -1,7 +1,6 @@
 package br.univille.lanchonetes.jdbc;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class DBConnection {
 
@@ -10,11 +9,14 @@ public class DBConnection {
 	public Connection openConnection(){
 		
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			// diz a lenda que a classe de cima esta depreciada e necessita utilizar a 
+			// com.mysql.cj.jdbc.Driver
 			connection = java.sql.DriverManager
 					.getConnection(
 					"jdbc:mysql://localhost:3306/LANCHONETEDB",
 					"root", "");
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -24,7 +26,7 @@ public class DBConnection {
 	public void closeConnection(){
 		try {
 			connection.close();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
