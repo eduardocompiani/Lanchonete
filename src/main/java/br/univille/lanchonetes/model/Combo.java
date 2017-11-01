@@ -6,7 +6,16 @@ public class Combo {
 	private int cdCombo;
 	private String nmCombo;
 	private float vlCombo;
+	private float vlDesconto;
 	private List<Produto> produtos;
+	
+	public float getVlDesconto() {
+		return vlDesconto;
+	}
+
+	public void setVlDesconto(float vlDesconto) {
+		this.vlDesconto = vlDesconto;
+	}
 	
 	public int getCdCombo() {
 		return cdCombo;
