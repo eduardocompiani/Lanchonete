@@ -1,1 +1,1 @@
-mvn package && start http://localhost:8080/ && java -jar target/dependency/webapp-runner.jar target/*.war
+mvn package && java -jar target/dependency/webapp-runner.jar target/*.war

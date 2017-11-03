@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -41,5 +43,44 @@ public class ProdutoRest {
 			e.printStackTrace();
 		}
 		return produtos;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public Produto getProduto(@PathParam("id") int id){
+		Produto produto = new Produto();
+		Connection conn = new DBConnection().openConnection();
+		String sql = "SELECT CDPRODUTO, NMPRODUTO, VLPRODUTO FROM PRODUTO WHERE CDPRODUTO = ?";
+		try{
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				produto.setCdProduto(rs.getInt(1));
+				produto.setNmProduto(rs.getString(2));
+				produto.setVlProduto(rs.getFloat(3));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return produto;
+	}
+	
+	@PUT
+	@Path("/{id}")
+	public void updateProduto(Produto produto){
+		Connection conn = new DBConnection().openConnection();
+		String sql = "UPDATE PRODUTO SET NMPRODUTO = ?, VLPRODUTO = ? WHERE CDPRODUTO = ?";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, produto.getNmProduto());
+			stmt.setFloat(2, produto.getVlProduto());
+			stmt.setInt(3, produto.getCdProduto());
+			stmt.execute();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
