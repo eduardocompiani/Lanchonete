@@ -14,8 +14,8 @@ public class DBConnection {
 			// com.mysql.cj.jdbc.Driver
 			connection = java.sql.DriverManager
 					.getConnection(
-					"jdbc:mysql://localhost:3306/LANCHONETEDB",
-					"root", "");
+					"jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10202856",
+					"sql10202856", "9lWWkQAYF9");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
