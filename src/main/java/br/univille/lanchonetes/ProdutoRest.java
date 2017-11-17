@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -69,7 +71,7 @@ public class ProdutoRest {
 	
 	@PUT
 	@Path("/{id}")
-	public void updateProduto(Produto produto){
+	public void updateProduto(Produto produto, @PathParam("id") int id){
 		Connection conn = new DBConnection().openConnection();
 		String sql = "UPDATE PRODUTO SET NMPRODUTO = ?, VLPRODUTO = ? WHERE CDPRODUTO = ?";
 		
@@ -77,8 +79,41 @@ public class ProdutoRest {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, produto.getNmProduto());
 			stmt.setFloat(2, produto.getVlProduto());
-			stmt.setInt(3, produto.getCdProduto());
+			stmt.setInt(3, id);
 			stmt.execute();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Produto cadastrarProduto(Produto produto){
+		Connection conn = new DBConnection().openConnection();
+		String sql = "INSERT INTO PRODUTO (NMPRODUTO, VLPRODUTO) VALUES (?,?)";
+		try{
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, produto.getNmProduto());
+			stmt.setFloat(2, produto.getVlProduto());
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			produto.setCdProduto(rs.getInt(1));			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return produto;
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	public void deletarProduto(@PathParam("id") int id){
+		Connection conn = new DBConnection().openConnection();
+		String sql = "DELETE FROM PRODUTO WHERE CDPRODUTO = ?";
+		try{
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -1,5 +1,6 @@
 package br.univille.lanchonetes.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Combo {
@@ -7,7 +8,7 @@ public class Combo {
 	private String nmCombo;
 	private float vlCombo;
 	private float vlDesconto;
-	private List<Produto> produtos;
+	private List<Produto> produtos = new ArrayList();
 	
 	public float getVlDesconto() {
 		return vlDesconto;

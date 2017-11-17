@@ -29,4 +29,10 @@ public class Produto {
 	public void setVlProduto(float vlProduto) {
 		this.vlProduto = vlProduto;
 	}
+
+	@Override
+	public String toString() {
+		return "Produto [cdProduto=" + cdProduto + ", nmProduto=" + nmProduto + ", vlProduto=" + vlProduto + "]";
+	}
+	
 }
