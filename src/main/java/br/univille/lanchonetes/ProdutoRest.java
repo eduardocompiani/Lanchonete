@@ -41,6 +41,9 @@ public class ProdutoRest {
 				
 				produtos.add(produto);
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -63,6 +66,9 @@ public class ProdutoRest {
 				produto.setNmProduto(rs.getString(2));
 				produto.setVlProduto(rs.getFloat(3));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -81,6 +87,8 @@ public class ProdutoRest {
 			stmt.setFloat(2, produto.getVlProduto());
 			stmt.setInt(3, id);
 			stmt.execute();
+			stmt.close();
+			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -98,7 +106,10 @@ public class ProdutoRest {
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			produto.setCdProduto(rs.getInt(1));			
+			produto.setCdProduto(rs.getInt(1));		
+			rs.close();
+			stmt.close();
+			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -114,6 +125,8 @@ public class ProdutoRest {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
+			stmt.close();
+			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

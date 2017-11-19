@@ -3,7 +3,7 @@ package br.univille.lanchonetes.model;
 public class ItemVenda {
 	private boolean isProduto;
 	private int cdProdutoVenda;
-	private int nmProdutoVenda;
+	private String nmProdutoVenda;
 	private float vlProdutoVenda;
 	
 	public boolean isProduto() {
@@ -18,10 +18,10 @@ public class ItemVenda {
 	public void setCdProdutoVenda(int cdProdutoVenda) {
 		this.cdProdutoVenda = cdProdutoVenda;
 	}
-	public int getNmProdutoVenda() {
+	public String getNmProdutoVenda() {
 		return nmProdutoVenda;
 	}
-	public void setNmProdutoVenda(int nmProdutoVenda) {
+	public void setNmProdutoVenda(String nmProdutoVenda) {
 		this.nmProdutoVenda = nmProdutoVenda;
 	}
 	public float getVlProdutoVenda() {
